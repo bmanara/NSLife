@@ -1,4 +1,4 @@
-# CS50W Capstone Project (NSLife)
+# NSLife
 ---
 
 ## Background
