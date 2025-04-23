@@ -18,9 +18,7 @@ This django app is built to help NSMen keep track of their NS Journey and to ens
 Users will be able to create an account and keep track of their past IPPT attempts, their future IPPT/NS FIT bookings and dates, and also keep track of their callups and mannings. Not only that but there is an in-built calculator that everyone can use without signing in, to see whether they are able to pass their IPPT test based on their age. The grading is based on the Singapore Armed Forces IPPT grading system. 
 
 ## Distinctiveness and Complexity
----
-
-I believe this project meets all requirements given for the final assignment. 
+--- 
 
 The application is built with the django framework for the back-end, with Javascript on the front-end. 
 User authentication, updates to SQLite databases, are all done with django, while Javascript is used to handle the user interface and how it reacts. Bootstrap library is also used for the design of the user interface.
