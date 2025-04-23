@@ -1,0 +1,33 @@
+{% extends 'NSLife/layout.html '%}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ user.first_name }}'s Profile</h1>
+        <div id="profile">
+            <button id="edit-profile-btn" class="btn btn-warning float-right" type="button">Edit Username/DOB</button>
+            <p>Username: <strong>{{ user.username }}</strong></p>
+            <p>Full Name: <strong>{{ user.first_name }} {{ user.last_name }}</strong></p>
+            <p>Date of Birth: <strong>{{ user.birthdate }}</strong></p>
+            <p>Email: <strong>{{ user.email }}</strong></p>
+        </div>
+        <div>
+            <form class="form-control" id="profile-form" action="{% url 'profile' %}" method="post">
+                {% csrf_token %}
+                <div>
+                    <label class="form-label">Edit Username:</label><input class="form-control" type="text" name="new_username" value="{{ user.username }}">
+                </div>
+                <div>
+                    <label class="form-label">Edit Date of Birth:</label><input class="form-control" type="date" name="new_birthdate" value="{{ date }}">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-warning mt-2">Submit Edits</button>
+                </div>
+                <button type="button" class="btn btn-secondary float-right" id="cancel-edit-profile">Cancel</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="static/NSLife/profile.js"></script>
+{% endblock %}

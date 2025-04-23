@@ -1,0 +1,30 @@
+{% extends 'NSLife/layout.html' %}
+
+{% block body %}
+    <div class="container" id="login">
+        <form class="row g-3" action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="col-md-12">
+                <label class="form-label" for="{{ form.username.id_for_label }}">Username</label>
+                {{ form.username }}
+            </div>
+            <div class="col-md-12">
+                <label class="form-label" for="{{ form.password.id_for_label }}">Password</label>
+                {{ form.password }}
+            </div>
+            <div>  
+                <button class="btn btn-primary" type="submit">Login</button>
+            </div>
+            
+        </form>
+    </div>
+{% endblock %}

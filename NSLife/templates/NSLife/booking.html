@@ -1,0 +1,61 @@
+{% extends 'NSLife/layout.html' %}
+
+{% block body %}
+    <div class="container">
+        <h1>IPPT & NS FIT Booking / Records</h1>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <form id="exercise-form" class="form-control" action="{% url 'booking' %}" method="post">
+            {% csrf_token %}
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="exercise-type" id="ippt-input" value="ippt" checked>
+                <label class="form-check-label" for="ippt-input">IPPT</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="exercise-type" id="nsfit-input" value="nsfit">
+                <label class="form-check-label" for="nsfit-input">NS FIT</label>
+            </div>
+
+            <select name="locations" id="ippt-locations" class="form-select" required>
+                <option selected disabled hidden>Choose location:</option>
+                <option value="maju-fcc">Maju FCC</option>
+                <option value="kranji-fcc">Kranji FCC</option>
+                <option value="khatib-fcc">Khatib FCC</option>
+                <option value="bedok-fcc">Bedok FCC</option>
+            </select>
+
+            <select id="nsfit-locations" class="form-select">
+                <option selected disabled hidden>Choose location:</option>
+                <option value="maju-fcc">Maju FCC</option>
+                <option value="kranji-fcc">Kranji FCC</option>
+                <option value="khatib-fcc">Khatib FCC</option>
+                <option value="bedok-fcc">Bedok FCC</option>
+                <option value="bishan-park">Bishan-Ang Mo Kio Park</option>
+                <option value="marina-bay">Marina City Gallery @ Marina Bay</option>
+                <option value="punggol-park">Punggol Park</option>
+                <option value="home">FIT @ Home (Video Conference)</option>
+            </select>
+
+            <div>
+                <label class="form-label">Date and Time:</label>
+                <input type="datetime-local" name="exercise-datetime">
+            </div>
+
+            <div id="score">
+                <label class="form-label">Score: (if IPPT has not been attempted, leave blank and update once attempted)</label>
+                <input type="number" name="exercise-score" max="100" min="0">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="static/NSLife/booking.js"></script>
+{% endblock %}

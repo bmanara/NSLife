@@ -1,0 +1,56 @@
+{% extends 'NSLife/layout.html' %}
+
+{% block body %}
+    <div class="container">
+        {% if user.is_authenticated %}
+            <h1>Welcome back, {{ user.first_name }}.</h1>
+        {% else %}
+            <h1>Home Page</h1>
+            <p>Please sign in / register to use all features of the website.</p>
+        {% endif %}
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-4 mt-3">
+                <div class="card">
+                    <img class="card-img-top" src="https://static.mothership.sg/1/2022/01/bmtc-mats.png">
+                    <div class="card-body">
+                        <h5>IPPT / NS FIT Booking Tracker</h5>
+                        <p class="card-text">Keep track of your IPPT and NS FIT bookings here. View your past IPPT bookings / NS FIT attendance and results.</p>
+                        <a href="{% url 'tracker' %}" class="btn btn-primary">Access eService</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-3">
+                <div class="card">
+                    <img class="card-img-top" src="https://i0.wp.com/theleadingpride.com/wp-content/uploads/2019/09/ELISS-2.jpg?resize=1024%2C683&ssl=1">
+                    <div class="card-body">
+                        <h5>IPPT Score Calculator</h5>
+                        <p class="card-text">Calculate your IPPT Score based on your age group and check your final grade.</p>
+                        <a href="{% url 'scoring' %}" class="btn btn-primary">Access eService</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-3">
+                <div class="card">
+                    <img class="card-img-top" src="https://s3-ap-southeast-1.amazonaws.com/pap-dr-wp/2019/11/SAF-01.jpg">
+                    <div class="card-body">
+                        <h5>Manage Call-Ups & Mannings</h5>
+                        <p class="card-text">Got your call up? Update your call up and manning dates to make sure you are ready to train in camp.</p>
+                        <a href="{% url 'reservist' %}" class="btn btn-primary">Access eService</a>
+                    </div>
+                </div>
+            </div>
+                
+        </div>
+    </div>
+{% endblock %}

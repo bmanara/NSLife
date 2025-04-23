@@ -1,0 +1,53 @@
+{% extends 'NSLife/layout.html' %}
+
+{% block body %}
+    <div class="container" id="register">
+        <form class="row g-3" action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="col-md-4">
+                <label class="form-label" for="{{ form.first_name.id_for_label }}">First name</label>
+                {{ form.first_name }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="{{ form.last_name.id_for_label }}">Last name</label>
+                {{ form.last_name }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="{{ form.birthdate.id_for_label }}">Date of Birth</label>
+                {{ form.birthdate }}
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label" for="{{ form.username.id_for_label }}">Username</label>
+                {{ form.username }}
+            </div>
+            <div class="col-md-8">
+                <label class="form-label" for="{{ form.email.id_for_label }}">Email</label>
+                {{ form.email }}
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label" for="{{ form.password.id_for_label}}">Password</label>
+                {{ form.password }}
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label" for="{{ form.confirm_password.id_for_label}}">Confirm password</label>
+                {{ form.confirm_password }}
+            </div>
+
+            <div>
+                <button class="btn btn-primary" type="submit">Register Account</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

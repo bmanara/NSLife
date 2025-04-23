@@ -1,0 +1,117 @@
+.container {
+    padding: 10px;
+}
+
+.card {
+    height: 100%;
+    
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+h6 {
+    text-align: right;
+    margin-right: 220px;
+    font-size: 18px;
+}
+
+/* Score Calculator Styling */
+#run-input {
+    direction: rtl;
+}
+
+#result {
+    font-size: 26px;
+    color:cadetblue;
+}
+
+#difference {
+    font-size: 16px;
+    color: gray;
+}
+
+/* Make certain buttons right aligned */
+#ippt a {
+    float: right;
+}
+
+#nsfit a {
+    float: right;
+}
+
+#reservist > button {
+    float: right;
+}
+
+#cancel-add {
+    float: right;
+}
+
+.float-right {
+    float: right;
+    position: relative;
+    bottom: 38px;
+}
+
+/*  */
+#nsfit-locations {
+    display: none;
+}
+
+#reservist-form {
+    display: none;
+}
+
+#profile-form {
+    display: none;
+}
+
+#exercise-form > * {
+    margin-top: 40px;
+}
+
+#reservist-form > * {
+    margin: 20px 0;
+}
+
+.booking {
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: gray;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: rgb(209, 207, 207);
+}
+
+.record {
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: rgb(113, 177, 93);
+    padding: 10px;
+    margin: 10px 0;
+    background-color: rgb(105, 211, 105);
+}
+
+.date {
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: rgb(146, 33, 33);
+    padding: 10px;
+    margin: 10px 0;
+    background-color: rgb(207, 100, 100);
+}
+
+.nav-item {
+    width: 100%;
+}
+
+#profile p {
+    font-size: 20px;
+}

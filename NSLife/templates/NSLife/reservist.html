@@ -1,0 +1,113 @@
+{% extends 'NSLife/layout.html' %}
+
+{% block body %}
+    <div class="container">
+        <div id="reservist">
+            <button id="add-reservist" class="btn btn-success">Add Reservist Date/Record</button>
+            <h1>Call Up & Manning Dates / Records</h1>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form class="form-control" id="reservist-form" action="{% url 'reservist' %}" method="post">
+                <h5>Add In-Camp Training Date/Record</h5>
+                {% csrf_token %}
+                <select name="ict_locations" class="form-select">
+                    <option selected hidden disabled>ICT Location:</option>
+                    <option value="clementi-camp">Clementi Camp</option>
+                    <option value="yishun-camp">Dieppe Barracks</option>
+                    <option value="hendon-camp">Hendon Camp</option>
+                    <option value="gedong-camp">Sungei Gedong Camp</option>
+                    <option value="jurong-camp">Jurong Camp II</option>
+                    <option value="khatib-camp">Khatib Camp</option>
+                    <option value="kranji-camp">Kranji Camp II</option>
+                    <option value="maju-camp">Maju Camp</option>
+                </select>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="intensity" value="low-key" checked>
+                    <label class="form-check-label">Low Key ICT</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="intensity" value="high-key">
+                    <label class="form-check-label">High Key ICT</label>
+                </div>
+
+                <div>
+                    <label class="form-label">Start Date and Time:</label>
+                    <input type="datetime-local" name="start-ict-datetime">
+                </div>
+
+                <div>
+                    <label class="form-label">End Date and Time:</label>
+                    <input type="datetime-local" name="end-ict-datetime">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add ICT</button>
+                
+                <button type="button" id="cancel-add" class="btn btn-secondary">Cancel</button>
+            </form>
+        </div>
+
+        <div id="reservist">
+            {% for manning in mannings %}
+                {% if manning.completed %}
+                    <div class="date" id="manning-{{ manning.id }}">
+                        <h3>In-Camp Training @ {{ manning.location }}</h3>
+                        <p>Start Date: {{ manning.start_datetime }}</p>
+                        <p>End Date: {{ manning.end_datetime }}</p>
+                        {% if manning.intensity == "low-key" %}
+                            <p><strong>Low Key ICT</strong></p>
+                        {% else %}
+                            <p><strong>High Key ICT</strong></p>
+                        {% endif %}
+                        <button class="btn btn-danger delete-manning float-right" data-id="{{ manning.id }}" type="button" data-bs-toggle="modal" data-bs-target="#delete">Delete</button>
+                    </div>
+                {% else %}
+                    <div class="record" id="manning-{{ manning.id }}">
+                        <h3>In-Camp Training @ {{ manning.location }}</h3>
+                        <p>Start Date: {{ manning.start_datetime }}</p>
+                        <p>End Date: {{ manning.end_datetime }}</p>
+                        {% if manning.intensity == "low-key" %}
+                            <p><strong>Low Key ICT completed</strong></p>
+                        {% else %}
+                            <p><strong>High Key ICT completed</strong></p>
+                        {% endif %}
+                        <button class="btn btn-danger delete-manning float-right" data-id="{{ manning.id }}" type="button" data-bs-toggle="modal" data-bs-target="#delete">Delete</button>
+                    </div>
+                {% endif %}
+            {% empty %}
+                <h5>No mannings or call up records / dates, add your dates once you are called up for ICT!</h5>
+            {% endfor%}
+        </div>
+
+
+        <div class="modal fade" id="delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="deleteLabel">Are you sure you want to delete?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Clicking "Delete" will delete this record/booking and you will not be able to undo this action. Proceed?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <form onsubmit="return false" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" id="delete_">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="static/NSLife/add.js"></script>
+{% endblock %}

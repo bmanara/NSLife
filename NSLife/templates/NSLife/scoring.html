@@ -1,0 +1,76 @@
+{% extends 'NSLife/layout.html' %}
+
+{% block body %}
+    <div class="container">
+        <h1>IPPT Score Calculator</h1>
+        <p>Points are calculated based on how well you do on the 3 IPPT stations:</p>
+        <ul>
+            <li>Push Up Station</li>
+            <li>Sit Up Station</li>
+            <li>2.4km Run Station</li>
+        </ul>
+        <p>For <strong>Push Up and Sit Up Station</strong>, you should count the max reps done in one minute.</p>
+        <p>For <strong>2.4km Run Station</strong>, you should take the time taken for you to complete a 2.4km run.</p>
+        <p>Points are calibrated to your age group at each IPPT station, with the age groups being calibrated within 3-year bands.</p>
+        <p>To determine your IPPT score, use the NSmen IPPT Score Calculator below:</p>
+
+        <div id="score-calculator">
+            <form class="row g-3">
+                <div class="col-8">
+                    <select class="form-select" id="age-input">
+                        <option selected hidden disabled>Select your age: </option>
+                        <option value="21">&lt;22 yrs old</option>
+                        {% for age in range %}
+                            <option value="{{ age }}">{{ age }} yrs old</option>
+                        {% endfor%}
+                    </select>
+                </div>
+                <div class="col-4">
+                    <p><strong>Age Group: <span id="age-group">1</span></strong></p>
+                </div>
+
+                <!-- Push Up Slider -->
+                <div class="col-2">
+                    <p>Push Ups: <span id="push-up-counter"></span> reps</p>
+                </div>
+                <div class="col-8">
+                    <input id="push-up-input" type="range" class="form-range" min="0" max="60">
+                </div>
+                <div class="col-2">
+                    <p><span id="push-up-points"></span> pts</p>
+                </div>
+
+                <!-- Sit Up Slider -->
+                <div class="col-2">
+                    <p>Sit Ups: <span id="sit-up-counter"></span> reps</p>
+                </div>
+                <div class="col-8">
+                    <input id="sit-up-input" type="range" class="form-range" min="0" max="60">
+                </div>
+                <div class="col-2">
+                    <p><span id="sit-up-points"></span> pts</p>
+                </div>
+
+                <!-- 2.4km Run Slider -->
+                <div class="col-2">
+                    <p>2.4km Timing: <span id="run-counter"></span></p>
+                </div>
+                <div class="col-8">
+                    <input id="run-input" type="range" class="form-range" min="480" max="1100">
+                </div>
+                <div class="col-2">
+                    <p><span id="run-points"></span> pts</p>
+                </div>
+            </form>
+
+            <h6 id="result"></h6>
+            <h6>Total Score: <span id="total-points"></span> pts</h6>
+            <h6 id="difference"></h6>
+            
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="static/NSLife/scoring.js"></script>
+{% endblock %}

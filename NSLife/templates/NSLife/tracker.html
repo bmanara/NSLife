@@ -1,0 +1,66 @@
+{% extends 'NSLife/layout.html' %}
+
+{% block body %}
+    <div class="container">
+        <div id="ippt">
+            <a class="btn btn-success" href="{% url 'booking' %}">Add Booking/Record</a>
+            <h1>IPPT Bookings/Records</h1>
+            {% for exercise in ippt_exercises %}
+                {% if exercise.score == 0 %}
+                    <div class="booking">
+                        <h5>IPPT Booking</h5>
+                        <a class="btn btn-warning" href="{% url 'edit_exercise' exercise.id %}">Edit Booking</a>
+                        <p>Test Location: {{ exercise.location }}</p>
+                        <p>Date & Time: {{ exercise.datetime }}</p>
+                    </div>
+                {% elif exercise.score == 1 %}
+                    <div class="record">
+                        <h5>IPPT Record</h5>
+                        <a class="btn btn-warning" href="{% url 'edit_exercise' exercise.id %}">Edit Record</a>
+                        <p>Test Location: {{ exercise.location }}</p>
+                        <p>Date & Time: {{ exercise.datetime }}</p>
+                        <p><strong>Final Score: Score not logged in yet, please enter your score! </strong></p>
+                    </div>
+                {% else %}
+                    <div class="record">
+                        <h5>IPPT Record</h5>
+                        <a class="btn btn-warning" href="{% url 'edit_exercise' exercise.id %}">Edit Record</a>
+                        <p>Test Location: {{ exercise.location }}</p>
+                        <p>Date & Time: {{ exercise.datetime }}</p>
+                        <p><strong>Final Score: {{ exercise.score }}</strong></p>
+                    </div>
+                {% endif %}
+            {% empty %}
+                    <div class="booking">
+                        <h5>You have no records or future bookings for IPPT.</h5>
+                    </div>
+            {% endfor %}
+        </div>
+        <div id="nsfit">
+            <a class="btn btn-success" href="{% url 'booking' %}">Add Booking/Record</a>
+            <h1>NS FIT Bookings/Records</h1>
+            {% for exercise in nsfit_exercises %}
+                {% if exercise.score == 0 %}
+                    <div class="booking">
+                        <h5>NS FIT Booking</h5>
+                        <a class="btn btn-warning" href="{% url 'edit_exercise' exercise.id %}">Edit Booking</a>
+                        <p>Test Location: {{ exercise.location }}</p>
+                        <p>Date & Time: {{ exercise.datetime }}</p>
+                    </div>
+                {% else %}
+                    <div class="record">
+                        <h5>NS FIT Record</h5>
+                        <a class="btn btn-warning" href="{% url 'edit_exercise' exercise.id %}">Edit Record</a>
+                        <p>Test Location: {{ exercise.location }}</p>
+                        <p>Date & Time: {{ exercise.datetime }}</p>
+                        <p><strong>Completed</strong></p>
+                    </div>
+                {% endif%}
+            {% empty %} 
+                <div class="booking">
+                    <h5>You have no records or future bookings for NS FIT.</h5>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
